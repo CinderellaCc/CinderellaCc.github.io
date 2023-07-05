@@ -60,3 +60,8 @@ date: 2023-06-28 21:09:35
 
 # 部署到Github上
 参考[教程](https://fe32.top/articles/hexo1600/)
+
+# 其他
+## 图片放置问题
+参考[资料](https://blog.csdn.net/ayuayue/article/details/109198493) 配置   
+注意，博客的卡片图（cover）放置的位置和博文图片放置的位置不一样
