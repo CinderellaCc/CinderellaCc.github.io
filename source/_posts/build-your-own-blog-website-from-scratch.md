@@ -1,9 +1,9 @@
 ---
 title: 从零开始搭建你的个人博客（Github+hexo+butterfly）
+categories: 
+    - 教程
 tags:
-  - 个人网站搭建
-categories:
-  - 教程
+    - 个人网站搭建
 abbrlink: 52106
 date: 2023-06-28 21:09:35
 ---
