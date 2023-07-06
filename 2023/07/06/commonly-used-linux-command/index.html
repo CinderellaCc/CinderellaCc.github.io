@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>常用Linux命令整理 | Orange's Blog</title><meta name="author" content="Orange"><meta name="copyright" content="Orange"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="查看某个进程是否正在运行1ps aux | grep 进程名  kill进程123kill -9 进程号  # 根据进程号killpkill -f 进程名 # 根据进程名killps -ef | grep &quot;进程名&quot; | grep -v grep | cut -c 9-15 | xargs kill -9 # 批量kill同名进程  查看某个进程的代码位置123pwdx 进程号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用Linux命令整理">
+<meta property="og:url" content="https://cinderellacc.github.io/2023/07/06/commonly-used-linux-command/index.html">
+<meta property="og:site_name" content="Orange&#39;s Blog">
+<meta property="og:description" content="查看某个进程是否正在运行1ps aux | grep 进程名  kill进程123kill -9 进程号  # 根据进程号killpkill -f 进程名 # 根据进程名killps -ef | grep &quot;进程名&quot; | grep -v grep | cut -c 9-15 | xargs kill -9 # 批量kill同名进程  查看某个进程的代码位置123pwdx 进程号">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cinderellacc.github.io/img/landscape.jpg">
+<meta property="article:published_time" content="2023-07-06T06:12:37.000Z">
+<meta property="article:modified_time" content="2023-07-06T06:53:08.018Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cinderellacc.github.io/img/landscape.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cinderellacc.github.io/2023/07/06/commonly-used-linux-command/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Orange","link":"链接: ","source":"来源: Orange's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常用Linux命令整理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-06 14:53:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://cinderellacc.github.io/en/"><i class="fa-fw fa fa-globe"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/landscape.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Orange's Blog"><span class="site-name">Orange's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://cinderellacc.github.io/en/"><i class="fa-fw fa fa-globe"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">常用Linux命令整理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-06T06:12:37.000Z" title="发表于 2023-07-06 14:12:37">2023-07-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-06T06:53:08.018Z" title="更新于 2023-07-06 14:53:08">2023-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="常用Linux命令整理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="查看某个进程是否正在运行"><a href="#查看某个进程是否正在运行" class="headerlink" title="查看某个进程是否正在运行"></a>查看某个进程是否正在运行</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep 进程名</span><br></pre></td></tr></table></figure>
+
+<h2 id="kill进程"><a href="#kill进程" class="headerlink" title="kill进程"></a>kill进程</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kill -9 进程号  # 根据进程号kill</span><br><span class="line">pkill -f 进程名 # 根据进程名kill</span><br><span class="line">ps -ef | grep &quot;进程名&quot; | grep -v grep | cut -c 9-15 | xargs kill -9 # 批量kill同名进程</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看某个进程的代码位置"><a href="#查看某个进程的代码位置" class="headerlink" title="查看某个进程的代码位置"></a>查看某个进程的代码位置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pwdx 进程号</span><br><span class="line">ll /proc/进程号</span><br><span class="line">ps aux | grep 进程号/进程名</span><br></pre></td></tr></table></figure>
+
+<h2 id="在指定目录下新建或删除用户"><a href="#在指定目录下新建或删除用户" class="headerlink" title="在指定目录下新建或删除用户"></a>在指定目录下新建或删除用户</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd -d /opt/XXX -m 用户名</span><br><span class="line">passwd 用户名 # 添加密码</span><br><span class="line">userdel chencheng</span><br></pre></td></tr></table></figure>
+
+<h2 id="批量安装和导出python依赖"><a href="#批量安装和导出python依赖" class="headerlink" title="批量安装和导出python依赖"></a>批量安装和导出python依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirement.txt # 导出依赖</span><br><span class="line">pip install -r requirement.txt # 安装依赖</span><br><span class="line">while read requirement; do pip install $requirement -i  https://pypi.tuna.tsinghua.edu.cn/simple; done &lt; requirements.txt # 安装依赖，跳过失败项</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何使用别人的python环境"><a href="#如何使用别人的python环境" class="headerlink" title="如何使用别人的python环境"></a>如何使用别人的python环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方式一：<span class="built_in">export</span>环境</span></span><br><span class="line">export PATH=/data/chencheng/anaconda3/envs/para_env/bin:$PATH</span><br><span class="line">source ~/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方式二：使用别人环境下的python运行自己的代码</span></span><br><span class="line">nohup /data/chencheng/anaconda3/envs/para_env/bin/python csp_para.py &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="打包和解压缩"><a href="#打包和解压缩" class="headerlink" title="打包和解压缩"></a>打包和解压缩</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">tar打包 文件1和文件2 成XXX.tar.gz</span></span><br><span class="line">tar -zcvf XXX.tar.gz 文件1 文件2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">tar解压缩</span></span><br><span class="line">tar -zxvf XXX.tar.gz -C /some/directory</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zip压缩文件</span></span><br><span class="line">zip -r XXX.zip /XXX</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">unzip解压缩</span></span><br><span class="line">unzip XXX.zip -d /some/directory</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压.gz文件</span></span><br><span class="line">gzip -d XXX.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="从一台机器传文件到另一台机器"><a href="#从一台机器传文件到另一台机器" class="headerlink" title="从一台机器传文件到另一台机器"></a>从一台机器传文件到另一台机器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp [-P 端口号] XXX user@ip:/path/to/some/directory</span><br></pre></td></tr></table></figure>
+
+<h2 id="复制时排除某目录"><a href="#复制时排除某目录" class="headerlink" title="复制时排除某目录"></a>复制时排除某目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">例如有目录/a/b/c /a/d/e，要复制到/f，排除b目录</span></span><br><span class="line">cp -r !(b) /f</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看磁盘占用、文件占用"><a href="#查看磁盘占用、文件占用" class="headerlink" title="查看磁盘占用、文件占用"></a>查看磁盘占用、文件占用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br><span class="line">du -ah --max-depth=1</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://cinderellacc.github.io">Orange</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cinderellacc.github.io/2023/07/06/commonly-used-linux-command/">https://cinderellacc.github.io/2023/07/06/commonly-used-linux-command/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cinderellacc.github.io" target="_blank">Orange's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="/img/landscape.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/07/05/connect-to-remote-machine-through-vscode/" title="如何使用vscode调试远程代码（通过跳板机登录、终端使用）"><img class="cover" src="/img/landscape.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">如何使用vscode调试远程代码（通过跳板机登录、终端使用）</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Orange</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/CinderellaCc" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:984964145@11.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">小破站刚刚诞生，还在优化当中~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E8%BF%9B%E7%A8%8B%E6%98%AF%E5%90%A6%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">查看某个进程是否正在运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kill%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">kill进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%BB%A3%E7%A0%81%E4%BD%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">查看某个进程的代码位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%8C%87%E5%AE%9A%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%B0%E5%BB%BA%E6%88%96%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-number">4.</span> <span class="toc-text">在指定目录下新建或删除用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85%E5%92%8C%E5%AF%BC%E5%87%BApython%E4%BE%9D%E8%B5%96"><span class="toc-number">5.</span> <span class="toc-text">批量安装和导出python依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%88%AB%E4%BA%BA%E7%9A%84python%E7%8E%AF%E5%A2%83"><span class="toc-number">6.</span> <span class="toc-text">如何使用别人的python环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="toc-number">7.</span> <span class="toc-text">打包和解压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%A6%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">从一台机器传文件到另一台机器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E6%97%B6%E6%8E%92%E9%99%A4%E6%9F%90%E7%9B%AE%E5%BD%95"><span class="toc-number">9.</span> <span class="toc-text">复制时排除某目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E3%80%81%E6%96%87%E4%BB%B6%E5%8D%A0%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">查看磁盘占用、文件占用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/06/commonly-used-linux-command/" title="常用Linux命令整理"><img src="/img/landscape.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用Linux命令整理"/></a><div class="content"><a class="title" href="/2023/07/06/commonly-used-linux-command/" title="常用Linux命令整理">常用Linux命令整理</a><time datetime="2023-07-06T06:12:37.000Z" title="发表于 2023-07-06 14:12:37">2023-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/connect-to-remote-machine-through-vscode/" title="如何使用vscode调试远程代码（通过跳板机登录、终端使用）"><img src="/img/landscape.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何使用vscode调试远程代码（通过跳板机登录、终端使用）"/></a><div class="content"><a class="title" href="/2023/07/05/connect-to-remote-machine-through-vscode/" title="如何使用vscode调试远程代码（通过跳板机登录、终端使用）">如何使用vscode调试远程代码（通过跳板机登录、终端使用）</a><time datetime="2023-07-05T09:17:40.000Z" title="发表于 2023-07-05 17:17:40">2023-07-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/28/build-your-own-blog-website-from-scratch/" title="从零开始搭建你的个人博客（Github+hexo+butterfly）"><img src="/img/landscape.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始搭建你的个人博客（Github+hexo+butterfly）"/></a><div class="content"><a class="title" href="/2023/06/28/build-your-own-blog-website-from-scratch/" title="从零开始搭建你的个人博客（Github+hexo+butterfly）">从零开始搭建你的个人博客（Github+hexo+butterfly）</a><time datetime="2023-06-28T13:09:35.000Z" title="发表于 2023-06-28 21:09:35">2023-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/28/markdown-tutorial/" title="Markdown 教程"><img src="/img/landscape.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Markdown 教程"/></a><div class="content"><a class="title" href="/2023/06/28/markdown-tutorial/" title="Markdown 教程">Markdown 教程</a><time datetime="2023-06-28T06:45:06.000Z" title="发表于 2023-06-28 14:45:06">2023-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/28/HongKong-trip/" title="2023年6月18日 - 香港旅行游记"><img src="/images/HongKong-trip-cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2023年6月18日 - 香港旅行游记"/></a><div class="content"><a class="title" href="/2023/06/28/HongKong-trip/" title="2023年6月18日 - 香港旅行游记">2023年6月18日 - 香港旅行游记</a><time datetime="2023-06-28T06:25:33.000Z" title="发表于 2023-06-28 14:25:33">2023-06-28</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/landscape.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Orange</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://blog-comment-ocrmh8jj9-cinderellacc.vercel.app/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, {"placeholder":"我从山中来","requiredFields":["nick","mail"]}))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.982279,28.19409';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>
