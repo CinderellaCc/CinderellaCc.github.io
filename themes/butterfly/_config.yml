@@ -29,7 +29,7 @@ menu:
 
 
 # 代码
-highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false # 支持6种代码高亮样式
+highlight_theme: darker #  darker / pale night / light / ocean / mac / mac light / false # 支持6种代码高亮样式
 highlight_copy: true # copy button    # 代码复制功能
 highlight_lang: true # show the code language # 是否显示代码语言
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button # 代码框展开与关闭功能

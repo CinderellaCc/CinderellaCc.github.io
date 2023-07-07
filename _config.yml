@@ -109,6 +109,7 @@ theme: butterfly
 deploy:
   type: 'git'
   repo: 'git@github.com:CinderellaCc/CinderellaCc.github.io.git'
+  
   branch: gh-pages
 
 # 搜索

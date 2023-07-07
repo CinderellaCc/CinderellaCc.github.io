@@ -77,6 +77,17 @@ cp -r !(b) /f
 
 ## 查看磁盘占用、文件占用
 ```shell
-df -h
-du -ah --max-depth=1
+df -h   # 查看磁盘占用量
+du -ah --max-depth=1 # 查看当前目录下各文件的大小
+```
+
+## 更改目录所属人
+```shell
+# 在root权限下
+chown -R orange:orange dirname
+```
+
+## 查看某用户的所有进程情况
+```shell
+top -u orange # 输入命令后，再按c显示各进程详细目录信息;按m将进程按占用内存从大到小显示
 ```
