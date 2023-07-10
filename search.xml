@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>python日志模板（即取即用）</title>
+      <link href="/2023/07/10/python-log-template/"/>
+      <url>/2023/07/10/python-log-template/</url>
+      
+        <content type="html"><![CDATA[<p>本文提供了一个简单的python日志模板，及其简单，欢迎使用！</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">from</span> logging.handlers <span class="keyword">import</span> TimedRotatingFileHandler</span><br><span class="line"></span><br><span class="line">LOG_PATH = <span class="string">&#x27;logs/XXX.log&#x27;</span>  <span class="comment"># 日志保存位置</span></span><br><span class="line"></span><br><span class="line">logger = logging.getLogger()</span><br><span class="line">logger.setLevel(logging.INFO)</span><br><span class="line">handler = TimedRotatingFileHandler(filename=LOG_PATH, when=<span class="string">&quot;midnight&quot;</span>, interval=<span class="number">1</span>, backupCount=<span class="number">7</span>) <span class="comment"># backupCount=7 保存过去7天的日志</span></span><br><span class="line">formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s %(lineno)s %(levelname)s: %(message)s &#x27;</span>)</span><br><span class="line">handler.setFormatter(formatter)</span><br><span class="line">logger.addHandler(handler)</span><br><span class="line"></span><br><span class="line">log.info(<span class="string">&#x27;这个日志太好用啦&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vim使用教程，提高你的工作效率</title>
       <link href="/2023/07/10/vim-tips/"/>
       <url>/2023/07/10/vim-tips/</url>
@@ -20,9 +45,9 @@
       
         <tags>
             
-            <tag> Linux </tag>
-            
             <tag> vim </tag>
+            
+            <tag> Linux </tag>
             
         </tags>
       
