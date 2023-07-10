@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>vim使用教程，提高你的工作效率</title>
+      <link href="/2023/07/10/vim-tips/"/>
+      <url>/2023/07/10/vim-tips/</url>
+      
+        <content type="html"><![CDATA[<p>我在入职第一年内，写代码没有使用其他IDE，所有编程工作都是使用vim完成。我将结合一年多的vim使用经验，总结一套最实用的vim使用技巧。</p><h1 id="下载最佳搭档-Termius"><a href="#下载最佳搭档-Termius" class="headerlink" title="下载最佳搭档 Termius"></a>下载最佳搭档 <a href="https://www.termius.com/">Termius</a></h1><p>Termius是ssh客户端，免费好用，界面美观</p><blockquote><p>使用技巧：窗口切换快捷键：Alt + 左右键（掌握这一个就行）</p></blockquote><h1 id="环境配置-vimrc"><a href="#环境配置-vimrc" class="headerlink" title="环境配置 .vimrc"></a>环境配置 .vimrc</h1><p>创建自己的个人Linux账户后，在用户目录（~）下创建.vimrc文件，写入以下内容</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">syntax enable</span><br><span class="line">set number</span><br><span class="line">set tabstop=4</span><br><span class="line">set expandtab</span><br><span class="line">set paste</span><br></pre></td></tr></table></figure><blockquote><p>.vimrc文件主要用于配置vim，例如语法高亮、显示行号、自动缩进等；功能很多，但我觉得以上简单配置就够用了</p></blockquote><h1 id="熟记vim快捷键"><a href="#熟记vim快捷键" class="headerlink" title="熟记vim快捷键"></a>熟记vim快捷键</h1><p>掌握vim快捷键能够极大的提高工作效率，非常重要</p><p>vim命令模式分为三类：编辑模式、命令模式、底线命令模式</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">编辑模式：</span><br><span class="line"></span><br><span class="line">- 命令模式下按 i 进入编辑模式，开始编辑文本</span><br><span class="line"></span><br><span class="line">命令模式：</span><br><span class="line"></span><br><span class="line">- [ + ]：跳到文件顶部</span><br><span class="line">- ] + [：跳到文件底部</span><br><span class="line">- Ctrl + f ：向下翻页</span><br><span class="line">- Ctrl + b：向上翻页</span><br><span class="line">- 小写o：在下方插入一行</span><br><span class="line">- 大写O：在上方插入一行</span><br><span class="line">- g + f：跳转到路径所指向的文件（在log中查bug好用）</span><br><span class="line">- Shift + #：向上查找；此时按 n，则为向下查找</span><br><span class="line">- Ctrl + o：返回到跳转前的位置（可以一直往前跳哦，还可以在不同文件之间跳哦）</span><br><span class="line">- Ctrl + i ： 与Ctrl + o 作用相反</span><br><span class="line">- Ctrl + v：可视块模式，搭配Shift + i 可以实现代码块的左右移动，注释等功能</span><br><span class="line">- u：撤销操作（一不小心输了奇奇怪怪的字符或删除了代码的时候可用）</span><br><span class="line">- x：删除当前字符</span><br><span class="line">- 大写 I：行首插入（不包括空格）</span><br><span class="line">- 大写A：行尾插入</span><br><span class="line"></span><br><span class="line">底线命令模式：</span><br><span class="line"></span><br><span class="line">- 命令模式下按 ：进入底线命令模式</span><br><span class="line">- e /home/beauty.txt：跳转到/home/beauty.txt文件中</span><br><span class="line">- /beautiful：查找beautiful</span><br><span class="line">- /beautiful\|handsome：同时查找beautiful和handsome</span><br><span class="line">- set nu：设置行号，set nu!：取消行号</span><br><span class="line">- set list：查看文本格式</span><br><span class="line">- set paste：复制大段代码不错位</span><br></pre></td></tr></table></figure><h1 id="vim跨文件复制粘贴"><a href="#vim跨文件复制粘贴" class="headerlink" title="vim跨文件复制粘贴"></a>vim跨文件复制粘贴</h1><p><strong>step 1</strong>: vim打开A文件<br><strong>step 2</strong>: 命令模式，输入：”:sp”或者”:vsp”切分出另一个窗口<br><strong>step 3</strong>: 命令模式，输入：”:e B”，在一个窗口中打开B文件<br><strong>step 4</strong>: 按ctrl+w，按w，切换到A文件窗口命令模式，光标移到需复制起始行，输入复制的行数量，输入yy，进行复制<br><strong>step 5</strong>: 按ctrl+w，按w，切换到B文件窗口；命令模式，光标移到需粘贴行，输入p，完成粘贴</p><h1 id="字符串全局替换"><a href="#字符串全局替换" class="headerlink" title="字符串全局替换"></a>字符串全局替换</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/a/b/g # 用b替换a</span><br></pre></td></tr></table></figure><h1 id="搜索同时包含两个字符串的所有“行”"><a href="#搜索同时包含两个字符串的所有“行”" class="headerlink" title="搜索同时包含两个字符串的所有“行”"></a>搜索同时包含两个字符串的所有“行”</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:set magic</span><br><span class="line">/foo.*bar # 搜索含有foo和bar所在的行</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> vim </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>常用python代码整理</title>
       <link href="/2023/07/07/commonly-used-python-code/"/>
       <url>/2023/07/07/commonly-used-python-code/</url>
