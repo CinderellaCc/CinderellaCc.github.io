@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>python多进程模板</title>
+      <link href="/2023/07/12/python-multiprocessing/"/>
+      <url>/2023/07/12/python-multiprocessing/</url>
+      
+        <content type="html"><![CDATA[<p>在工作中，我们经常会用到多进程来处理数据，从而提高工作效率。下文是一个多进程模板，可以按照具体需求进行修改，欢迎使用~</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">data</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;进程<span class="subst">&#123;os.getpid()&#125;</span>开始处理数据<span class="subst">&#123;data&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="comment"># 这里写你的数据处理代码</span></span><br><span class="line">    time.sleep(<span class="number">1</span>) </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;进程<span class="subst">&#123;os.getpid()&#125;</span>结束处理数据<span class="subst">&#123;data&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">split_data</span>(<span class="params">data_list, cpu_worker_num</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27; 将数据列表分成cpu_worker_num份，例如cpu_worker_num=3，data_list=[1,2,3,4,5,6,7,8,9,10]，返回[[1, 2, 3, 4], [5, 6, 7], [8, 9, 10]]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    chunk_size = <span class="built_in">int</span>(<span class="built_in">len</span>(data_list)/cpu_worker_num) + <span class="number">1</span> </span><br><span class="line">    <span class="keyword">return</span> [data_list[x:x + chunk_size] <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(data_list), chunk_size)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 进程数</span></span><br><span class="line">    cpu_worker_num = <span class="number">8</span></span><br><span class="line">    <span class="comment"># 待处理的数据列表</span></span><br><span class="line">    <span class="comment"># 例如，要处理多个文件，该列表可以是文件路径列表，即让每个进程分别处理一部分文件；也可以是任何你要传给单个进程的参数列表</span></span><br><span class="line">    data_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]</span><br><span class="line">    <span class="comment"># 创建进程池</span></span><br><span class="line">    pool = Pool(cpu_worker_num)</span><br><span class="line">    <span class="comment"># 将数据列表分成cpu_worker_num份，分别传给cpu_worker_num个进程处理</span></span><br><span class="line">    <span class="comment"># 每个进程都会调用func函数，参数是data_list的其中一份</span></span><br><span class="line">    pool_data_list = split_data(data_list, cpu_worker_num)</span><br><span class="line">    <span class="comment"># 进程池中的每个进程都会调用func函数，参数是pool_data_list的其中一份</span></span><br><span class="line">    pool.<span class="built_in">map</span>(func, pool_data_list)</span><br><span class="line">    <span class="comment"># 关闭进程池</span></span><br><span class="line">    pool.close()</span><br><span class="line">    <span class="comment"># 等待进程池中的所有进程结束</span></span><br><span class="line">    pool.join()</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>redis教程（python）</title>
       <link href="/2023/07/11/redis-tutorial/"/>
       <url>/2023/07/11/redis-tutorial/</url>
