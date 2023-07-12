@@ -89,11 +89,11 @@ cover:
   archives_enable: true
   # the position of cover in home page 封面显示的位置
   # left/right/both
-  position: both
+  position: left
   # 当没有设置cover时，默认的封面显示
   default_cover: # 当配置多张图片时，会随机选择一张图作为封面
     # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
-    - /img/landscape.jpg
+    - /img/blog_cover.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
