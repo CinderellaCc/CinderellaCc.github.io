@@ -107,3 +107,6 @@ systemctl status sshd.service #查看ssh服务的状态
 
 参考资料：
 - [vscode使用跳板机（密钥）进入内网并连接内网中其它机器（密码）](https://blog.csdn.net/baidu_41553551/article/details/128505159)
+
+## 如何解决VSCode无法连接到Python内核问题
+参考：https://www.python100.com/html/ZQQX88O0863H.html
