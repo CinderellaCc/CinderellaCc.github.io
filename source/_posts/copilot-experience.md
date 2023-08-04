@@ -1,6 +1,7 @@
 ---
 title: copilot使用初体验（写代码效率直接翻倍！）
 tags: 工具
+categories: 技术
 abbrlink: 62584
 date: 2023-07-21 16:15:06
 ---

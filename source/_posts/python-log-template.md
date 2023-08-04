@@ -12,14 +12,18 @@ date: 2023-07-10 16:38:15
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
-LOG_PATH = 'logs/XXX.log'  # 日志保存位置
+def setup_rotate_logger(file_path, level=logging.INFO):
+    log_fmt = '%(asctime)s \"%(filename)s\" %(process)d %(lineno)s %(levelname)s %(funcName)s: %(message)s '
+    formatter = logging.Formatter(log_fmt)
+    log = getLogger()
+    logfile = os.path.abspath(file_path)
+    rotateHandler = ConcurrentRotatingFileHandler(logfile, "a", 512 * 1024 * 1024, 999)
+    rotateHandler.setFormatter(formatter)
+    log.addHandler(rotateHandler)
+    log.setLevel(level)
+    log.info('Fancy concurrent logger started!')
+    return log
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-handler = TimedRotatingFileHandler(filename=LOG_PATH, when="midnight", interval=1, backupCount=7) # backupCount=7 保存过去7天的日志
-formatter = logging.Formatter('%(asctime)s %(lineno)s %(levelname)s: %(message)s ')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-
-log.info('这个日志太好用啦')
+LOG_FILE_PATH = 'path_to_save_log.log'
+log = setup_rotate_logger(LOG_FILE_PATH)
 ```
