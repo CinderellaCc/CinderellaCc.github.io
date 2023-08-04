@@ -1,5 +1,5 @@
 ---
-title: 用Optimum的ONNX runtime加速sentence transformer（pytorch）
+title: 用Optimum的ONNX runtime加速sentence transformer（Pytorch+GPU）
 tags: ONNX runtime
 categories: 模型加速
 abbrlink: 64162
@@ -23,8 +23,7 @@ date: 2023-08-04 15:13:41
 # 环境配置
 运行以下命令，安装Optimum所对应的依赖
 ``` python
-pip install optimum[onnxruntime]==1.5.0 # CPU
-pip install optimum[onnxruntime-gpu] # GPU
+pip install optimum[onnxruntime-gpu]
 ```
 
 # 将Sentence Transformer模型转换成ONNX格式
@@ -113,20 +112,23 @@ print('在{}目录下生成优化后的模型文件：{}'.format(onnx_model_dir,
 from optimum.onnxruntime import ORTModelForFeatureExtraction
 from transformers import AutoTokenizer
 
-model_optimized = ORTModelForFeatureExtraction.from_pretrained(onnx_model_dir, file_name="model_optimized.onnx")
+model_optimized = ORTModelForFeatureExtraction.from_pretrained(onnx_model_dir, file_name="model_optimized.onnx", use_io_binding=True) # 设置use_io_binding=True
 tokenizer = AutoTokenizer.from_pretrained(onnx_model_dir)
 
-optimized_emb = SentenceEmbeddingPipeline(model=model_optimized, tokenizer=tokenizer)
+optimized_emb = SentenceEmbeddingPipeline(model=model_optimized, tokenizer=tokenizer, device=1) # 指定GPU编号
 
 # 使用优化后的模型进行推理
 pred = optimized_emb('今天是周五啦，明天就是周末啦，开心，开心，开心')
 print(pred[0][:5])
 # 输出：tensor([ 0.3507,  0.3588,  1.1540, -0.4012, -0.4290])
+```
 
-# 查看是否与原Sentence Transformer模型结果一致
+查看是否与原模型结果一致（结论：一致）
+```python
 from sentence_transformers import SentenceTransformer
 
-ori_emb = SentenceTransformer('./models/m3e-base', device='cpu') # 加载原模型
+ori_emb = SentenceTransformer('./models/m3e-base', device='cuda') # 加载原模型
+
 pred = ori_emb.encode('今天是周五啦，明天就是周末啦，开心，开心，开心')
 print(pred[:5])
 # 输出：[ 0.35070744  0.35883522  1.1540244  -0.4012457  -0.42901722]
@@ -135,30 +137,54 @@ print(pred[:5])
 # 性能评估
 现在，我们来对比一下在加速前后模型的性能（推理速度）
 ```python
-# 对比优化前后的模型推理时效
 import time
 from tqdm import tqdm
 
-text = ['今天是周五啦，明天就是周末啦，开心，开心，开心'] * 1000
+text_lst = ['今天是周五啦，明天就是周末啦，开心，开心，开心'] * 10000
+
+## 测试单条推理时效
+start = time.time()
+for text in tqdm(text_lst):
+    optimized_emb(text)
+end = time.time()
+print('单条onnxruntime: {}s'.format(round((end - start) / len(text_lst), 5)))
+
+start = time.time()
+for text in tqdm(text_lst):
+    ori_emb.encode(text)
+end = time.time()
+print('单条sentence transformer: {}s'.format(round((end - start) / len(text_lst), 5)))
+
+## 测试批量推理时效
 batch_size = 32
+start = time.time()
+for i in tqdm(range(0, len(text_lst), batch_size)):
+    optimized_emb(text_lst[i:i + batch_size])
+end = time.time()
+print('(batch)onnxruntime: {}s'.format(round((end - start) / len(text_lst), 5)))
 
 start = time.time()
-for i in tqdm(range(0, len(text), batch_size), desc='onnxruntime'):
-    pred = optimized_emb(text[i:i+batch_size])
-avg_time1 = (time.time() - start) / len(text)
-print('onnxruntime平均耗时：', avg_time1)
+for i in tqdm(range(0, len(text_lst), batch_size)):
+    ori_emb.encode(text_lst[i:i + batch_size])
+end = time.time()
+print('(batch)sentence transformer: {}s'.format(round((end - start) / len(text_lst), 5)))
 
-start = time.time()
-for i in tqdm(range(0, len(text), batch_size), desc='sentence_transformers'):
-    pred = ori_emb.encode(text[i:i+batch_size])
-avg_time2 = (time.time() - start) / len(text)
-print('sentence_transformers平均耗时：', avg_time2)
 
 # 输出：
-# onnxruntime平均耗时： 0.16051861429214478
-# sentence_transformers平均耗时： 0.3235261046886444
+# 单条onnxruntime: 0.00444s
+# 单条sentence transformer: 0.0221s
+# (batch)onnxruntime: 0.00449s
+# (batch)sentence transformer: 0.00101s
 ```
 
-可以看到，在GPU上，使用Optimum的ONNX runtime加速Sentence Transformer后，模型的推理速度提升了约2倍
+# 结论
+单条推理时，ONNX runtime相较于Sentence Transformer速度提升5倍  
+bacth推理时，ONNX runtime没有Sentence Transformer速度快；**为啥呀？**  
+ONNX runtime的单条和batch速度基本一致
 
-> 参考资料：[Accelerate Sentence Transformers with Hugging Face Optimum](https://www.philschmid.de/optimize-sentence-transformers)
+
+
+
+> 参考资料：  
+> [1] [Accelerate Sentence Transformers with Hugging Face Optimum](https://www.philschmid.de/optimize-sentence-transformers)  
+> [2] [Optimizing Transformers for GPUs with Optimum](https://www.philschmid.de/optimizing-transformers-with-optimum-gpu)
