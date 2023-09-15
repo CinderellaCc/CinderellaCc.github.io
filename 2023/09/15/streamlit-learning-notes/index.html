@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>streamlit入门学习笔记 | Orange's Blog</title><meta name="author" content="Orange"><meta name="copyright" content="Orange"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="安装1pip install install streamlit  启动12345# 方法一python -m streamlit run your_script.py# 方法二streamlit run your_script.py  使用方法st.write()的简单使用使用st.write()在网页上画出任何你想展示的内容，包括：text、data、matplotlib plot、chart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="streamlit入门学习笔记">
+<meta property="og:url" content="https://cinderellacc.github.io/2023/09/15/streamlit-learning-notes/index.html">
+<meta property="og:site_name" content="Orange&#39;s Blog">
+<meta property="og:description" content="安装1pip install install streamlit  启动12345# 方法一python -m streamlit run your_script.py# 方法二streamlit run your_script.py  使用方法st.write()的简单使用使用st.write()在网页上画出任何你想展示的内容，包括：text、data、matplotlib plot、chart">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cinderellacc.github.io/img/blog_cover.jpg">
+<meta property="article:published_time" content="2023-09-15T08:21:16.000Z">
+<meta property="article:modified_time" content="2023-09-15T09:21:21.933Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="streamlit">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cinderellacc.github.io/img/blog_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cinderellacc.github.io/2023/09/15/streamlit-learning-notes/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Orange","link":"链接: ","source":"来源: Orange's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'streamlit入门学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-15 17:21:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://cinderellacc.github.io/en/"><i class="fa-fw fa fa-globe"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/blog_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Orange's Blog"><span class="site-name">Orange's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://cinderellacc.github.io/en/"><i class="fa-fw fa fa-globe"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">streamlit入门学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-15T08:21:16.000Z" title="发表于 2023-09-15 16:21:16">2023-09-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-15T09:21:21.933Z" title="更新于 2023-09-15 17:21:21">2023-09-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="streamlit入门学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install install streamlit</span><br></pre></td></tr></table></figure>
+
+<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方法一</span></span><br><span class="line">python -m streamlit run your_script.py</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方法二</span></span><br><span class="line">streamlit run your_script.py</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="st-write-的简单使用"><a href="#st-write-的简单使用" class="headerlink" title="st.write()的简单使用"></a><code>st.write()</code>的简单使用</h2><p>使用<code>st.write()</code>在网页上画出任何你想展示的内容，包括：text、data、matplotlib plot、charts等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 代码示例</span><br><span class="line">import streamlit as st</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">st.write(&quot;Here&#x27;s our first attempt at using data to create a table:&quot;)</span><br><span class="line">st.write(pd.DataFrame(&#123;</span><br><span class="line">    &#x27;first column&#x27;: [1, 2, 3, 4],</span><br><span class="line">    &#x27;second column&#x27;: [10, 20, 30, 40]</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+<h2 id="使用st-table-和st-dataframe-画表格"><a href="#使用st-table-和st-dataframe-画表格" class="headerlink" title="使用st.table()和st.dataframe()画表格"></a>使用<code>st.table()</code>和<code>st.dataframe()</code>画表格</h2><p>除了用<code>st.write()</code>，也可用<code>st.table()</code>、<code>st.dataframe()</code>等特定函数来制作更加精美的图表。建议用特定函数来实现更复杂的功能，<code>st.write()</code>存在一定局限性，示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">dataframe = pd.DataFrame(</span><br><span class="line">    np.random.randn(<span class="number">10</span>, <span class="number">20</span>),</span><br><span class="line">    columns=(<span class="string">&#x27;col %d&#x27;</span> % i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>)))</span><br><span class="line"></span><br><span class="line">st.dataframe(dataframe.style.highlight_max(axis=<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">dataframe = pd.DataFrame(</span><br><span class="line">    np.random.randn(<span class="number">10</span>, <span class="number">20</span>),</span><br><span class="line">    columns=(<span class="string">&#x27;col %d&#x27;</span> % i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>)))</span><br><span class="line">st.table(dataframe)</span><br></pre></td></tr></table></figure>
+<h2 id="使用st-line-chart-画折线图"><a href="#使用st-line-chart-画折线图" class="headerlink" title="使用st.line_chart()画折线图"></a>使用<code>st.line_chart()</code>画折线图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">chart_data = pd.DataFrame(</span><br><span class="line">     np.random.randn(<span class="number">20</span>, <span class="number">3</span>),</span><br><span class="line">     columns=[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>])</span><br><span class="line"></span><br><span class="line">st.line_chart(chart_data)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用st-map-画地图"><a href="#使用st-map-画地图" class="headerlink" title="使用st.map()画地图"></a>使用<code>st.map()</code>画地图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">map_data = pd.DataFrame(</span><br><span class="line">    np.random.randn(<span class="number">1000</span>, <span class="number">2</span>) / [<span class="number">50</span>, <span class="number">50</span>] + [<span class="number">37.76</span>, -<span class="number">122.4</span>],</span><br><span class="line">    columns=[<span class="string">&#x27;lat&#x27;</span>, <span class="string">&#x27;lon&#x27;</span>])</span><br><span class="line"></span><br><span class="line">st.<span class="built_in">map</span>(map_data)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用st-slider-、st-button-和st-selectbox-画小组件"><a href="#使用st-slider-、st-button-和st-selectbox-画小组件" class="headerlink" title="使用st.slider()、st.button()和st.selectbox()画小组件"></a>使用<code>st.slider()</code>、<code>st.button()</code>和<code>st.selectbox()</code>画小组件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&#x27;first column&#x27;</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">    <span class="string">&#x27;second column&#x27;</span>: [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>]</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">option = st.selectbox(</span><br><span class="line">    <span class="string">&#x27;Which number do you like best?&#x27;</span>,</span><br><span class="line">     df[<span class="string">&#x27;first column&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;You selected: &#x27;</span>, option</span><br></pre></td></tr></table></figure>
+
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p><code>streamlit</code>可将所有的菜单元素（如滑动条、选择框、输入框等）统一放置到网页一侧，使网页更加美观。运行如下代码看看效果吧~</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a selectbox to the sidebar:</span></span><br><span class="line">add_selectbox = st.sidebar.selectbox(</span><br><span class="line">    <span class="string">&#x27;How would you like to be contacted?&#x27;</span>,</span><br><span class="line">    (<span class="string">&#x27;Email&#x27;</span>, <span class="string">&#x27;Home phone&#x27;</span>, <span class="string">&#x27;Mobile phone&#x27;</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a slider to the sidebar:</span></span><br><span class="line">add_slider = st.sidebar.slider(</span><br><span class="line">    <span class="string">&#x27;Select a range of values&#x27;</span>,</span><br><span class="line">    <span class="number">0.0</span>, <span class="number">100.0</span>, (<span class="number">25.0</span>, <span class="number">75.0</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="进度条"><a href="#进度条" class="headerlink" title="进度条"></a>进度条</h2><p>当你的程序运行需要一定时间时，你可将进度条打印出来，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;Starting a long computation...&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a placeholder</span></span><br><span class="line">latest_iteration = st.empty()</span><br><span class="line">bar = st.progress(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">  <span class="comment"># Update the progress bar with each iteration.</span></span><br><span class="line">  latest_iteration.text(<span class="string">f&#x27;Iteration <span class="subst">&#123;i+<span class="number">1</span>&#125;</span>&#x27;</span>)</span><br><span class="line">  bar.progress(i + <span class="number">1</span>)</span><br><span class="line">  time.sleep(<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;...and now we\&#x27;re done!&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h1><p>以下是官网解释：</p>
+<p>Streamlit 缓存使您的应用程序即使在从 Web 加载数据、操作大型数据集或执行昂贵的计算时也能保持高性能。</p>
+<p>缓存背后的基本思想是存储昂贵的函数调用的结果，并在相同的输入再次发生时返回缓存的结果，而不是在后续运行中调用该函数。</p>
+<blockquote>
+<p>我的理解：streamlit app与flask不同，falsk创建的是一个服务，是一个长期运行在后台的程序，程序中一些开销大的计算在服务启动时就计算完毕，后续在不同地方访问服务都无需重新计算，直接获取计算结果，速度非常快（此处不包含一些需要前后端交互导致的计算过程）；而Streamlit app是一个python脚本，每次在浏览器访问页面时都会重新运行该脚本，为此，引入了<code>cache</code>功能避免重复计算。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@st.cache_data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">long_running_function</span>(<span class="params">param1, param2</span>):</span><br><span class="line">    <span class="keyword">return</span> …</span><br></pre></td></tr></table></figure>
+
+<h1 id="多个页面"><a href="#多个页面" class="headerlink" title="多个页面"></a>多个页面</h1><p>Streamlit可创建多个页面，在不同页面间的切换也十分方便，具体操作参考<a target="_blank" rel="noopener" href="https://docs.streamlit.io/">官方教程</a></p>
+<h1 id="Streamlit的特性"><a href="#Streamlit的特性" class="headerlink" title="Streamlit的特性"></a>Streamlit的特性</h1><p>Streamlit是从上到下运行的Python脚本<br>Streamlit apps are Python scripts that run from top to bottom</p>
+<p>每当用户打开浏览器选项卡指向你的应用时，脚本就会被重新执行<br>Every time a user opens a browser tab pointing to your app, the script is re-executed</p>
+<p>当脚本执行时，Streamlit在浏览器中实时绘制其输出<br>As the script executes, Streamlit draws its output live in a browser</p>
+<p>脚本使用Streamlit缓存来避免重新计算昂贵的函数，因此更新发生得非常快<br>Scripts use the Streamlit cache to avoid recomputing expensive functions, so updates happen very fast</p>
+<p>每次用户与小部件交互时，脚本都会重新执行，并且在运行期间将该小部件的输出值设置为新值。<br>Every time a user interacts with a widget, your script is re-executed and the output value of that widget is set to the new value during that run.</p>
+<p>Streamlit可以包含多个页面，这些页面被定义在pages文件夹中单独的.py文件中。<br>Streamlit apps can contain multiple pages, which are defined in separate .py files in a pages folder.</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>本教程是作者在自学过程中简单记录的笔记，仅做参考，详细教程请移步<a target="_blank" rel="noopener" href="https://docs.streamlit.io/">官方教程</a></p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>Streamlit官方教程：<a target="_blank" rel="noopener" href="https://docs.streamlit.io/">https://docs.streamlit.io/</a><br>Streamlit官方教程API文档：<a target="_blank" rel="noopener" href="https://docs.streamlit.io/library/api-reference">https://docs.streamlit.io/library/api-reference</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://cinderellacc.github.io">Orange</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cinderellacc.github.io/2023/09/15/streamlit-learning-notes/">https://cinderellacc.github.io/2023/09/15/streamlit-learning-notes/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cinderellacc.github.io" target="_blank">Orange's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/streamlit/">streamlit</a></div><div class="post_share"><div class="social-share" data-image="/img/blog_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/08/04/onnxruntime-tutorial/" title="用Optimum的ONNX runtime加速sentence transformer（Pytorch+GPU）"><img class="cover" src="/img/blog_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">用Optimum的ONNX runtime加速sentence transformer（Pytorch+GPU）</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Orange</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/CinderellaCc" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:984964145@11.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">小破站刚刚诞生，还在优化当中~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#st-write-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">st.write()的简单使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8st-table-%E5%92%8Cst-dataframe-%E7%94%BB%E8%A1%A8%E6%A0%BC"><span class="toc-number">3.2.</span> <span class="toc-text">使用st.table()和st.dataframe()画表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8st-line-chart-%E7%94%BB%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">使用st.line_chart()画折线图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8st-map-%E7%94%BB%E5%9C%B0%E5%9B%BE"><span class="toc-number">3.4.</span> <span class="toc-text">使用st.map()画地图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8st-slider-%E3%80%81st-button-%E5%92%8Cst-selectbox-%E7%94%BB%E5%B0%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">3.5.</span> <span class="toc-text">使用st.slider()、st.button()和st.selectbox()画小组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B1%80"><span class="toc-number">3.6.</span> <span class="toc-text">布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%BA%A6%E6%9D%A1"><span class="toc-number">3.7.</span> <span class="toc-text">进度条</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cache"><span class="toc-number">4.</span> <span class="toc-text">Cache</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%A1%B5%E9%9D%A2"><span class="toc-number">5.</span> <span class="toc-text">多个页面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Streamlit%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">Streamlit的特性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%EF%BC%9A"><span class="toc-number">7.</span> <span class="toc-text">注：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">参考资料：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/15/streamlit-learning-notes/" title="streamlit入门学习笔记"><img src="/img/blog_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="streamlit入门学习笔记"/></a><div class="content"><a class="title" href="/2023/09/15/streamlit-learning-notes/" title="streamlit入门学习笔记">streamlit入门学习笔记</a><time datetime="2023-09-15T08:21:16.000Z" title="发表于 2023-09-15 16:21:16">2023-09-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/04/onnxruntime-tutorial/" title="用Optimum的ONNX runtime加速sentence transformer（Pytorch+GPU）"><img src="/img/blog_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="用Optimum的ONNX runtime加速sentence transformer（Pytorch+GPU）"/></a><div class="content"><a class="title" href="/2023/08/04/onnxruntime-tutorial/" title="用Optimum的ONNX runtime加速sentence transformer（Pytorch+GPU）">用Optimum的ONNX runtime加速sentence transformer（Pytorch+GPU）</a><time datetime="2023-08-04T07:13:41.000Z" title="发表于 2023-08-04 15:13:41">2023-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/21/copilot-experience/" title="copilot使用初体验（写代码效率直接翻倍！）"><img src="/img/blog_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="copilot使用初体验（写代码效率直接翻倍！）"/></a><div class="content"><a class="title" href="/2023/07/21/copilot-experience/" title="copilot使用初体验（写代码效率直接翻倍！）">copilot使用初体验（写代码效率直接翻倍！）</a><time datetime="2023-07-21T08:15:06.000Z" title="发表于 2023-07-21 16:15:06">2023-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/python-multiprocessing/" title="python多进程模板"><img src="/img/blog_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python多进程模板"/></a><div class="content"><a class="title" href="/2023/07/12/python-multiprocessing/" title="python多进程模板">python多进程模板</a><time datetime="2023-07-12T09:26:28.000Z" title="发表于 2023-07-12 17:26:28">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/11/redis-tutorial/" title="redis教程（python）"><img src="/img/blog_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis教程（python）"/></a><div class="content"><a class="title" href="/2023/07/11/redis-tutorial/" title="redis教程（python）">redis教程（python）</a><time datetime="2023-07-11T02:52:25.000Z" title="发表于 2023-07-11 10:52:25">2023-07-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/blog_cover.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By Orange</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://blog-comment-ocrmh8jj9-cinderellacc.vercel.app/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, {"placeholder":"我从山中来","requiredFields":["nick","mail"]}))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.982279,28.19409';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>
