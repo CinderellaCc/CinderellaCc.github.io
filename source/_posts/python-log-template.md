@@ -9,8 +9,11 @@ date: 2023-07-10 16:38:15
 本文提供了一个简单的python日志模板，及其简单，欢迎使用！
 
 ```python
+import os
 import logging
-from logging.handlers import TimedRotatingFileHandler
+from logging import getLogger, INFO
+from concurrent_log_handler import ConcurrentRotatingFileHandler
+
 
 def setup_rotate_logger(file_path, level=logging.INFO):
     log_fmt = '%(asctime)s \"%(filename)s\" %(process)d %(lineno)s %(levelname)s %(funcName)s: %(message)s '
